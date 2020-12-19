@@ -30,6 +30,11 @@ namespace ContosoUniversity.Models
          */
         public int? InstructorID { get; set; }
 
+        //What identifies the column as a concurrency tracking column.
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
+
         public Instructor Administrator { get; set; }
         //A department may have many courses.
         public ICollection<Course> Courses { get; set; }
