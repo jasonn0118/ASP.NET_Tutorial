@@ -70,6 +70,7 @@ namespace ContosoUniversity.Pages.Instructors
                 i => i.FirstMidName, i => i.LastName,
                 i => i.HireDate, i => i.OfficeAssignment))
             {
+                //Shows Null when location information is empty.
                 if (String.IsNullOrWhiteSpace(
                     instructorToUpdate.OfficeAssignment?.Location))
                 {
@@ -79,6 +80,8 @@ namespace ContosoUniversity.Pages.Instructors
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
+            //Below codes in OnPostAsync will run when TryUpdateModel fails.
+            //Apply information from the checkboxes to the instructor entity being edited.
             UpdateInstructorCourses(_context, selectedCourses, instructorToUpdate);
             PopulateAssignedCourseData(_context, instructorToUpdate);
             return Page();
